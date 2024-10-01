@@ -36,12 +36,31 @@ testing_labels = testing_labels[:4000]
 # training images from zero to 20,000 and from zero to 4,000.
 
 model = models.Sequential()
+#we created a sequential model
+
 model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3)))
+#32 filters with 3x3 size. ReLU equals the negative values to the 0.
+# because we want to help the model learn non-linear relationships
+
 model.add(layers.MaxPooling2D((2,2)))
+#this layer does the wownsampling.
+# it takes the max values from each 2x2 section. and shrinks feature maps
 model.add(layers.Conv2D(64, (3,3), activation='relu'))
+
 model.add(layers.MaxPooling2D((2,2)))
 model.add(layers.Conv2D(64,(3,3), activation='relu'))
+
 model.add(layers.Flatten())
+#This layer converts the entire 2D matrix into a one-dimensional vector.
+# The 2D feature maps obtained from the convolution layers are flattened
+# and made ready for the fully connected (dense) layer.
+
 model.add(layers.Dense(64, activation='relu'))
-model.add(layers.Dense(10, activation='softmax'))  
+#Dense (Fully Connected) Layer: This layer is a structure in which
+# each neuron is fully connected to every neuron in the previous layer.
+model.add(layers.Dense(10, activation='softmax'))
+#Dense Layer (Output Layer): This layer has 10 neurons. This typically represents a
+# 10-class classification problem (e.g., 10 different categories in the CIFAR-10 dataset).
+#activation='softmax': This is a commonly used activation function for classification problems.
+# softmax gives the probability scores of each class, which add up to 1. It estimates how likely each class is.
 
