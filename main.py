@@ -33,4 +33,21 @@ testing_images = testing_images[:4000]
 testing_labels = testing_labels[:4000]
 
 
-model = models.load_model('image_classifier_model') 
+model = models.load_model('image_classifier_model')
+
+img = cv.imread('image_classifier_model/image.png')
+img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+
+plt.imshow(img, cmap=plt.cm.binary)
+# the visualising the image
+
+prediction = model.predict(np.array([img]) / 255)
+# doing the prediction.
+# we need to pass numpy array. because our model has certain structure
+
+index = np.argmax(prediction)
+# we need to have max value with index
+# because one of the neuron will have max activation and we want it
+print(f'prediction is : {class_names[index]}')
+
+
