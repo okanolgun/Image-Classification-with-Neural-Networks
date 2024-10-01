@@ -1,0 +1,71 @@
+# Testing a neural network is a difficult and long process for computers.
+# To shorten this process, we limited our test images and
+# training images from zero to 20,000 and from zero to 4,000.
+
+# GENERAL KNOWLEDGE ABOUT ACTIVATION FUNCTIONS
+# Activation Function:
+# Activation functions are used to transform the outputs of neurons in the layers
+# of the neural network model. Essentially, they create nonlinear relationships
+# and allow the model to learn more complex problems.
+#
+# ReLU (Rectified Linear Unit): Sets negative inputs to 0, leaves positive inputs the same.
+# ReLU reduces the problem of gradients dropping to zero and generally provides faster learning.
+# Softmax: Converts output values into probabilities.
+# This function is used in classification tasks because it gives the predicted probability of each class.
+
+
+model = models.Sequential()
+# we created a sequential model
+
+model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
+# 32 filters with 3x3 size. ReLU equals the negative values to the 0.
+# because we want to help the model learn non-linear relationships
+
+model.add(layers.MaxPooling2D((2, 2)))
+# this layer does the wownsampling.
+# it takes the max values from each 2x2 section. and shrinks feature maps
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+
+model.add(layers.Flatten())
+# This layer converts the entire 2D matrix into a one-dimensional vector.
+# The 2D feature maps obtained from the convolution layers are flattened
+# and made ready for the fully connected (dense) layer.
+
+model.add(layers.Dense(64, activation='relu'))
+# Dense (Fully Connected) Layer: This layer is a structure in which
+# each neuron is fully connected to every neuron in the previous layer.
+
+model.add(layers.Dense(10, activation='softmax'))
+# Dense Layer (Output Layer): This layer has 10 neurons. This typically represents a
+# 10-class classification problem (e.g., 10 different categories in the CIFAR-10 dataset).
+# activation='softmax': This is a commonly used activation function for classification problems.
+# softmax gives the probability scores of each class, which add up to 1. It estimates how likely each class is.
+
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+# What does it do?: It compiles the model and makes it ready to run.
+# optimizer='adam': Adam optimization algorithm is used.
+# This algorithm accelerates learning by updating the weights of the model.
+# loss='sparse_categorical_crossentropy': The categorical cross-entropy loss function is used.
+# This function is used in multi-class classification problems.
+# Since the labels are sequential numbers (e.g. [0,1,2,...]), the "sparse" version is preferred.
+# metrics=['accuracy']: Specifying a metric to measure the accuracy of the model.
+# Why do we do it?: We determine the optimization algorithm,
+# loss function and success metrics to enable the model to learn.
+
+model.fit(training_images, training_labels, epochs=10, validation_data=(testing_images, testing_labels))
+# What does it do?: Trains the model on the training data set for 10 epochs.
+# training_images: Image data used for training.
+# training_labels: Class labels for these images.
+# epochs=10: The model will complete the learning process by going over all training data 10 times (epochs).
+# Why do we do it?: We call the fit function to make the model learn on the training data.
+# In each epoch, the performance and loss of the model will be calculated.
+
+
+loss, accuracy = model.evaluate(testing_images, testing_labels)
+print(f"loss: {loss}")
+print(f"accuracy: {accuracy}")
+
+model.save("image_classifier_model")
