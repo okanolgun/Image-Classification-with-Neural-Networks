@@ -1,6 +1,4 @@
-# Testing a neural network is a difficult and long process for computers.
-# To shorten this process, we limited our test images and
-# training images from zero to 20,000 and from zero to 4,000.
+
 
 # GENERAL KNOWLEDGE ABOUT ACTIVATION FUNCTIONS
 # Activation Function:
