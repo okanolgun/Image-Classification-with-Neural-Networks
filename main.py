@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models
 
-(training_images, training_labels), (testing_images, testing_labels) = datasets.cifar10.load_data()
+(training_images, training_labels), (testing_images, testing_labels) = datasets.cifar10.load_data()   
 # The tuples we mentioned as training_images and testing_images
 # are already in the keras package. We get them with the load_data method.
 
@@ -25,7 +25,7 @@ for i in range(16):
 plt.show()
 # This code visualizes the 16 images from the training dataset
 # in black and white on a 4x4 grid, removes the axis markers,
-# and adds the class label below each image so that images and labels can be quickly inspected.
+# and adds the class label below each image so that images and labels can be quickly inspected
 
 training_images = training_images[:20000]
 training_labels = training_labels[:20000]
