@@ -8,7 +8,7 @@ from tensorflow.keras import datasets, layers, models
 # are already in the keras package. We get them with the load_data method.
 
 training_images, testing_images = training_images / 255, testing_images / 255
-# Normally the pixels on the training and test data are from zero to 255.
+# normally the pixels on the training and test data are from zero to 255.
 # Here we reduced the pixels to between zero and one and did this
 # so that the model gives better, faster and more beautiful results.
 
