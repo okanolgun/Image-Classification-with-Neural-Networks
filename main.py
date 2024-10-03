@@ -9,7 +9,7 @@ from tensorflow.keras import datasets, layers, models
 
 training_images, testing_images = training_images / 255, testing_images / 255
 # normally the pixels on the training and test data are from zero to 255.
-# Here we reduced the pixels to between zero and one and did this
+# here we reduced the pixels to between zero and one and did this
 # so that the model gives better, faster and more beautiful results.
 
 class_names = ['Plane', 'Car', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
